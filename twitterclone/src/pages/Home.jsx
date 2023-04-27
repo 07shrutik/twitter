@@ -1,22 +1,31 @@
 // import react, { useEffect, useState } from 'react';
-import { useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
+
+import { useRecoilValue } from "recoil";
+import { isLogin } from "./Atom";
+// import { Link } from "react-router-dom";
+import styles from "./Home.module.css";
+import Footer from "./Footer";
+import Sidebar from "./Sidebar";
+import SearchBar from "./SearchBar";
+import PostSection from "./PostSection";
+
 // import './style.css';
 
-
 function Home() {
-  const [data, setData] = useState(false);
-  useEffect(() => {
-    let res = JSON.parse(localStorage.getItem('isLogin'));
-    setData(res);
-  }, []);
+  const islogin = useRecoilValue(isLogin);
 
   return (
-    <div>
-      Home
-      {data && <li>done</li>}
-      <button><Link to="/login">Login</Link></button>
-    </div>
+    <>
+      <div className={styles.container}>
+        {islogin && <Sidebar />}
+        <div className={styles.main}>
+          {!islogin && <h1>Welcome to home page</h1>}
+          {islogin && <PostSection />}
+        </div>
+        <div className={styles.search}>{islogin && <SearchBar />}</div>
+      </div>
+      {!islogin && <Footer />}
+    </>
   );
 }
 

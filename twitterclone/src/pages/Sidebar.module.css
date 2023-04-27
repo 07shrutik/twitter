@@ -1,0 +1,24 @@
+.sidebar {
+    background-color: #f2f2f2;
+    width: 200px;
+    height: 100%;
+    /* position: fixed;
+    left: 0;
+    top: 0; */
+  }
+  
+  .options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .option {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .option:hover {
+    background-color: #ddd;
+  }
+  
