@@ -1,9 +1,10 @@
 import { Button, TextField } from "@mui/material";
 import google from "./google.png";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AppleIcon from "@mui/icons-material/Apple";
-import "./Login.module.css";
+
+import style from "./Login.module.css";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { isLogin } from "./Atom";
@@ -14,10 +15,19 @@ function Login() {
   const [password, setpassword] = useState("");
   const [islogin, setlogin] = useRecoilState(isLogin);
 
-  function handleLogin() {
-    const Users = JSON.parse(localStorage.getItem("user") || []);
+  const [errorEmail, setErrorEmail] = useState("");
+  const [errorPass, setErrorPass] = useState("");
 
-    const user = Users.find((user) => {
+  function handleLogin() {
+    const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
+
+    if (!isEmailValid || !isPasswordValid) {
+      return;
+    }
+
+    const users = JSON.parse(localStorage.getItem("users") || "[]");
+    const user = users.find((user) => {
       return (
         user.name.toString() === username.toString() ||
         user.email.toString() === username.toString() ||
@@ -27,96 +37,179 @@ function Login() {
 
     if (user) {
       if (user.password.toString() === password.toString()) {
-        alert("success");
-        setlogin(!islogin);
+        alert("Login successful");
+        setlogin(true);
         navigate("/home");
       } else {
-        alert("Invalid credentials");
+        alert("Invalid password");
       }
     } else {
       alert("User not found");
     }
+
+    setUsername("");
+    setpassword("");
   }
 
+  const validateEmail = () => {
+    const regex = /^\S+@\S+\.\S+$/;
+    if (!username) {
+      setErrorEmail("Email is required");
+      return false;
+    } else if (!regex.test(username)) {
+      setErrorEmail("It should be a valid email address");
+      return false;
+    } else {
+      setErrorEmail("");
+      return true;
+    }
+  };
+
+  const validatePassword = () => {
+    const regex =
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
+    if (!password) {
+      setErrorPass("Password is required!");
+      return false;
+    } else if (!regex.test(password)) {
+      setErrorPass(
+        "Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character!"
+      );
+      return false;
+    } else {
+      setErrorPass("");
+      return true;
+    }
+  };
+
   return (
-    <>
-      <TwitterIcon sx={{ color: "skyblue" }} />
-      <h1>Sign in to Twitter</h1>
-      <Button
-        sx={{
-          borderRadius: "100px",
-          backgroundColor: "white",
-          color: "black",
-          marginTop: "10px",
-        }}
-        variant="contained"
-      >
-        <img src={google} alt="google" /> Sign in with Gmail
-      </Button>
-      <br />
-      <Button
-        sx={{
-          borderRadius: "100px",
-          backgroundColor: "white",
-          color: "black",
-          marginTop: "15px",
-        }}
-        variant="contained"
-      >
-        <AppleIcon />
-        Sign in with Apple
-      </Button>
-      <br />
-      <form>
-        <TextField
-          id="filled-basic"
-          label="phone,email or username"
-          variant="filled"
-          onChange={(e) => {
-            setUsername(e.target.value);
-          }}
+    <div className={style.container}>
+      <div>
+        <TwitterIcon
+          sx={{ color: "skyblue", fontSize: "2rem", marginTop: ".5rem" }}
+          className={style.logo}
         />
-        <br />
-        <TextField
-          type="password"
-          id="filled-basic"
-          label="Password"
-          variant="filled"
-          onChange={(e) => {
-            setpassword(e.target.value);
-          }}
-        />
-        <br />
+        <h1>Sign in to Twitter</h1>
+      </div>
+
+      <div>
         <Button
           sx={{
             borderRadius: "100px",
             backgroundColor: "white",
+            width: "18rem",
             color: "black",
-            marginTop: "15px",
+            top: "0px",
           }}
           variant="contained"
         >
-          Forgot Password
+          <img src={google} alt="google" /> Sign in with Gmail
         </Button>
         <br />
         <Button
           sx={{
             borderRadius: "100px",
+            width: "18rem",
             backgroundColor: "white",
             color: "black",
-            marginTop: "15px",
+            marginTop: "10px",
           }}
           variant="contained"
-          onClick={handleLogin}
         >
-          Login
+          <AppleIcon />
+          Sign in with Apple
         </Button>
-        <br />
-      </form>
+      </div>
+      <br />
+      <div>
+        <form>
+          <TextField
+            id="filled-basic"
+            label="phone,email or username"
+            variant="filled"
+            sx={{
+              color: "white",
+              width: "18rem",
+              borderRadius: "5px",
+              border: "1px solid white",
+              "& label": { color: "white" },
+              "& input": { color: "white" },
+            }}
+            onChange={(e) => {
+              setUsername(e.target.value);
+            }}
+          />
+          <br />
+          {errorEmail && <span className={style.error}>{errorEmail}</span>}
+
+          <br />
+          <TextField
+            type="password"
+            id="filled-basic"
+            label="Password"
+            variant="filled"
+            sx={{
+              color: "white",
+              width: "18rem",
+              borderRadius: "5px",
+              border: "1px solid white",
+              "& label": { color: "white" },
+              "& input": { color: "white" },
+            }}
+            onChange={(e) => {
+              setpassword(e.target.value);
+            }}
+          />
+          <br />
+          {errorPass && <span className={style.error}>{errorPass}</span>}
+          <br />
+          <Button
+            sx={{
+              borderRadius: "100px",
+              backgroundColor: "white",
+              color: "black",
+              width: "18rem",
+              marginTop: "15px",
+            }}
+            variant="contained"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+          <br />
+          <Button
+            sx={{
+              borderRadius: "100px",
+              backgroundColor: "white",
+              color: "black",
+              width: "18rem",
+              marginTop: "15px",
+            }}
+            variant="contained"
+          >
+            Forgot Password
+          </Button>
+
+          <br />
+        </form>
+      </div>
       <p>
-        Don t have an account? <Link to="/register">Sign Up</Link>
+        Don t have an account? <br />
+        <Button
+          sx={{
+            borderRadius: "100px",
+            backgroundColor: "white",
+            color: "black",
+            width: "12rem",
+            marginTop: "15px",
+          }}
+          variant="contained"
+          onClick={() => navigate("/register")}
+        >
+          Sign Up
+        </Button>
       </p>
-    </>
+    </div>
   );
 }
 
