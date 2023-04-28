@@ -1,4 +1,4 @@
-import styles from "./Sidebar.module.css";
+import styles from "./SideBar.module.css";
 import HomeIcon from "@mui/icons-material/Home";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -7,46 +7,63 @@ import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import PersonIcon from "@mui/icons-material/Person";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
+import { Button } from "@mui/material";
 
-const Sidebar = () => {
+const LeftSideBar = () => {
   return (
     <div className={styles.sidebar}>
       <ul className={styles.options}>
+        <TwitterIcon
+          className={styles.option}
+          sx={{ color: "#42a5f5", fontSize: "3rem" }}
+        />
         <li className={styles.option}>
-          <HomeIcon />
+          <HomeIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Home
         </li>
         <li className={styles.option}>
-          <TagIcon />
+          <TagIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Expolre
         </li>
         <li className={styles.option}>
-          <NotificationsNoneIcon />
+          <NotificationsNoneIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Notifications
         </li>
         <li className={styles.option}>
-          <MailOutlineIcon />
+          <MailOutlineIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Message
         </li>
         <li className={styles.option}>
-          <BookmarkBorderIcon />
+          <BookmarkBorderIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Bookmarks
         </li>
         <li className={styles.option}>
-          <TwitterIcon />
+          <TwitterIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Twitter Blue
         </li>
         <li className={styles.option}>
-          <PersonIcon />
+          <PersonIcon sx={{ fontSize: 35, marginRight: 2 }} />
           Profile
         </li>
         <li className={styles.option}>
-          <MoreHorizIcon />
+          <MoreHorizIcon sx={{ fontSize: 35, marginRight: 2 }} />
           More
         </li>
+        <Button
+          variant="contained"
+          className={styles.btn}
+          sx={{
+            textTransform: "none",
+            borderRadius: "5rem",
+            width: "50%",
+            backgroundColor: "#42a5f5",
+          }}
+        >
+          Tweet
+        </Button>
       </ul>
     </div>
   );
 };
 
-export default Sidebar;
+export default LeftSideBar;

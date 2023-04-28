@@ -1,24 +1,33 @@
 .sidebar {
-    background-color: #f2f2f2;
-    width: 200px;
-    height: 100%;
-    /* position: fixed;
-    left: 0;
-    top: 0; */
-  }
+  background-color: white;
+  width: 25%;
+  height: 100vh;
+   position: fixed;
   
-  .options {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
+}
+
+.options {
+  list-style-type: none;
+  margin-top: 1rem;
   
-  .option {
-    padding: 10px;
-    cursor: pointer;
-  }
+  height: 100vh;
+}
+
+.option {
+  padding: 1rem;
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  left: 35%;
+}
+.btn{
   
-  .option:hover {
-    background-color: #ddd;
-  }
-  
+  cursor: pointer;
+  display: flex;
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  left: 35%;
+}

@@ -9,3 +9,7 @@ export const tweetData = atom({
   key: "tweetData",
   default: [],
 });
+export const userData = atom({
+  key: "userData",
+  default: [],
+});

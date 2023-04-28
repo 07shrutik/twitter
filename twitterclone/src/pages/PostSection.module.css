@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .main {
+    display: flex;
+    margin-top: 0px;
+    /* margin-left: 10px; */
+    padding-left: 10px;
+  }
+  .main p {
+    padding-left: 10px;
+  }
+  
