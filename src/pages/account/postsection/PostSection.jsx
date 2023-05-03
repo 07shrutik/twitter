@@ -187,7 +187,6 @@ export default function PostSection() {
               <div className={styles.main}>
                 <span className={styles.name}>{currentUser.username}</span>
                 <br />
-                {/* <span className={styles.username}>@{currentUser.username}</span> */}
               </div>
               <div className={styles.btn}>
                 <MoreHorizIcon />
