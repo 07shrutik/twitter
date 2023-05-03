@@ -5,7 +5,7 @@ import SearchBar from "../searchbar/SearchBar";
 import Middle from "../middle/Middle";
 import { RightSection } from "../rightsection/RightSection";
 import { RightDownSection } from "../rightdownsection/RightDownSection";
-import { isLogin } from "../../RecoilAtom/Atom";
+import { isLogin } from "../../recoilAtom/Atom";
 import Grid from "@mui/material/Grid";
 import styles from "./Home.module.css";
 import TwitterIcon from "@mui/icons-material/Twitter";
