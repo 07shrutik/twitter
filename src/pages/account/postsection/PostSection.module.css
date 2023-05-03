@@ -96,9 +96,13 @@
 
 @media screen and (max-width: 786px) {
   .Buttons {
-    width: 13rem;
+    display: flex;
+    width: 100%;
     box-sizing: border-box;
-    display: grid;
+    /* display: grid; */
     justify-content: center;
+  }
+  .post{
+    width: 147%;
   }
 }

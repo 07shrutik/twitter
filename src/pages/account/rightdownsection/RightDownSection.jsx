@@ -3,65 +3,64 @@ import { Button } from "@mui/material";
 import { useState } from "react";
 
 export function RightDownSection() {
-  // const [isFollowing, setIsFollowing] = useState(false);
-  const handleFollowToggle = (index) => {
-    const updatedData = Object.keys(userData).reduce((acc, key) => {
-      if (userData[key].id === index + 1) {
-        acc[key] = { ...userData[key], isFollow: !userData[key].isFollow };
-      } else {
-        acc[key] = userData[key];
-      }
-      return acc;
-    }, {});
-    setuserData(updatedData);
-  };
-  // const handleFollowToggle = () => {
-  //   setIsFollowing(!isFollowing);
-  // };
-
-  const users = {
-    item1: {
+  const [userData, setuserData] = useState([
+    {
       id: 1,
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnxUOMCGqeaHpA9gD_0avsOdEsNIsT0dquZA&usqp=CAU",
       name: "Virat kholi",
       username: "@imViratKholi",
+      isFollow: false,
     },
-    item2: {
+    {
       id: 2,
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKHCZf_dr4SdB7HAPZNWhAb2OmJBMiJkONUJ73QFESTDreK3V6PQVEp63Fv2e_G11I96A&usqp=CAU",
       name: "Anushka",
       username: "@imAnushka",
+      isFollow: false,
     },
-    item3: {
+    {
       id: 3,
       img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStkkk-rx6Tszbjkzx2bQNjfBib2jidHart1A&usqp=CAU",
       name: "Allu Arjun",
       username: "@AlluArjun",
+      isFollow: false,
     },
-    // item4: {
-    //   id: 4,
-    //   img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWLy2jHeLblN1TkHzaNK1CCA73mKnMxEbYEw&usqp=CAU",
-    //   name: "Mark Zuckerberg",
-    //   username: "@Mark",
-    // },
+    {
+      id: 4,
+      img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWLy2jHeLblN1TkHzaNK1CCA73mKnMxEbYEw&usqp=CAU",
+      name: "Mark Zuckerberg",
+      username: "@Mark",
+      isFollow: false,
+    },
+  ]);
+
+  const handleFollowToggle = (index) => {
+    setuserData((prevUserData) => {
+      return prevUserData.map((user) => {
+        if (user.id === index) {
+          return { ...user, isFollow: !user.isFollow };
+        } else {
+          return user;
+        }
+      });
+    });
   };
-  const [userData, setuserData] = useState(users);
 
   return (
     <div className={style.main}>
       <h1>Who to follow</h1> <br />
-      {Object.keys(userData).map((key, index) => (
-        <div key={userData[key].id} className={style.contain}>
+      {userData.map((user) => (
+        <div key={user.id} className={style.contain}>
           <img
-            src={userData[key].img}
-            alt={userData[key].name}
+            src={user.img}
+            alt={user.name}
             style={{ borderRadius: "100%", width: "4.9rem", height: "4.4rem" }}
           />
 
           <div>
-            <p className={style.h1}>{userData[key].name}</p>
+            <p className={style.h1}>{user.name}</p>
 
-            <p className={style.h2}>{userData[key].username}</p>
+            <p className={style.h2}>{user.username}</p>
           </div>
 
           <div style={{ marginLeft: "6rem" }}>
@@ -77,17 +76,15 @@ export function RightDownSection() {
                 backgroundColor: "#42a5f5",
                 marginTop: "1rem",
               }}
-              onClick={() => handleFollowToggle(index)}
+              onClick={() => handleFollowToggle(user.id)}
             >
-              {userData[key].isFollow ? "Following" : "Follow"}
+              {user.isFollow ? "Following" : "Follow"}
             </Button>
           </div>
         </div>
       ))}
       <br />
-      <a href="" className={style.more}>
-        Show more...
-      </a>
+      <p className={style.more}>Show more...</p>
     </div>
   );
 }

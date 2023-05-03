@@ -13,7 +13,6 @@ import IosShareIcon from "@mui/icons-material/IosShare";
 import { Button } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 
-
 export default function PostSection() {
   const [tweet, setTweet] = useRecoilState(tweetData);
   const [user, setUser] = useRecoilState(userData);
@@ -260,9 +259,5 @@ export default function PostSection() {
     return posts;
   };
 
-  return (
-    <div className={styles.tweets}>
-      {renderPosts()}
-    </div>
-  );
+  return <div className={styles.tweets}>{renderPosts()}</div>;
 }

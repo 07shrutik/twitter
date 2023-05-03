@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./SideBar.module.css";
 import HomeIcon from "@mui/icons-material/Home";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
@@ -167,7 +167,7 @@ const LeftSideBar = () => {
                   sx={{ display: "block", width: "100%" }}
                   onClick={handlelogOutOpen}
                 >
-                  ADD
+                  Add an existing user
                 </Button>
                 <Modal
                   open={logOutopen}
@@ -179,15 +179,21 @@ const LeftSideBar = () => {
                     <p style={{ width: "100%", textAlign: "center" }}>
                       <TwitterIcon sx={{ color: "#42a5f5" }} />
                     </p>
-                    <h2 style={{ width: "100%", textAlign: "center" }}>
+                    <h2
+                      style={{
+                        width: "100%",
+                        textAlign: "center",
+                        color: "black",
+                      }}
+                    >
                       Log out of Twitter?
                     </h2>
-                    <p>
+                    <p style={{ color: "black" }}>
                       You can always log back in at any time. If you just want
                       to switch accounts, you can do that by adding an existing
                       account.
                     </p>
-                    <Button onClick={handleLogout}>Logout</Button>
+                    <Button onClick={handleLogout}>Logout@{names}</Button>
                     <Button onClose={handlelogOutClose}>Cancle</Button>
                   </Box>
                 </Modal>
@@ -216,27 +222,40 @@ function Head() {
     setText(e.target.value);
     // console.log(image);
   }
-  useEffect(() => {
-    console.log(image);
-  }, [image]);
+  // useEffect(() => {
+  //   console.log(image);
+  // }, [image]);
 
   function handleClick() {
-    let userData = JSON.parse(localStorage.getItem("userData"));
-    let username = userData.username;
-    let userObj = {
-      username: username,
-      images:
-        "https://tse2.mm.bing.net/th?id=OIP.cphbUmdFsam1huiAHaOnGwHaFB&pid=Api&P=0",
-    };
-    let tweetObj = {
-      content: text,
-      image: image,
-    };
-    Object.preventExtensions(tweetObj);
-    Object.preventExtensions(userObj);
-    setTweet([tweetObj, ...tweet]);
-    setUser([userObj, ...user]);
+    if (image || text) {
+      let userData = JSON.parse(localStorage.getItem("userData"));
+      let username = userData.username;
+      let userObj = {
+        username: username,
+        images:
+          "https://tse2.mm.bing.net/th?id=OIP.cphbUmdFsam1huiAHaOnGwHaFB&pid=Api&P=0",
+      };
+      let tweetObj = {
+        content: text,
+        image: image,
+        likeCount: 0,
+        iscomment: false,
+        commentCount: 0,
+        isretweet: false,
+        reTweetsCount: 0,
+        isLiked: false,
+        poll: 0,
+        ispoll: false,
+        share: 0,
+        isshare: false,
+      };
+      Object.preventExtensions(tweetObj);
+      Object.preventExtensions(userObj);
+      setTweet([tweetObj, ...tweet]);
+      setUser([userObj, ...user]);
+    }
   }
+
   return (
     <>
       <div className={styles.postTweet}>
