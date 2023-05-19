@@ -20,7 +20,7 @@ import DateRangeIcon from "@mui/icons-material/DateRange";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useRecoilState } from "recoil";
 import { isLogin, tweetData, userData } from "../../recoilAtom/Atom";
-import { useEffect } from "react";
+
 import Popover from "@mui/material/Popover";
 import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
 

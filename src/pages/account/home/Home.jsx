@@ -40,7 +40,6 @@ function Home() {
         {islogin && <RightSection />}
         {islogin && <RightDownSection />}
       </Grid>
-
       {!islogin && <Footer />}
     </Grid>
   );

@@ -6,17 +6,11 @@ import { useNavigate } from "react-router-dom";
 import style from "./Register.module.css";
 
 export default function Register() {
-  let initialValues;
-  if (localStorage.getItem("user")) {
-    initialValues = JSON.parse(localStorage.getItem("user"));
-  } else {
-    initialValues = [];
-  }
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [] = useState(initialValues);
+
   const navigate = useNavigate();
 
   const [errorEmail, setErrorEmail] = useState("");
@@ -51,7 +45,6 @@ export default function Register() {
 
   function handleSubmit(e) {
     e.preventDefault();
-  
   }
 
   const validateEmail = () => {
